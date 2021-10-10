@@ -102,11 +102,15 @@ environment:
       NODE_RUNTIME_VERSION: 6.0.0
       TOOLSET_ARGS: --dist-url=https://electronjs.org/headers
 
-image: Visual Studio 2017
+image: 
+  - Visual Studio 2017
+  - Ubuntu
+  - macos
 
 
 install:
-  - scripts\build-appveyor.bat
+  - cmd: scripts\build-appveyor.bat
+  - sh: ./scripts/build_against_node.sh
 
 build: OFF
 test: OFF
