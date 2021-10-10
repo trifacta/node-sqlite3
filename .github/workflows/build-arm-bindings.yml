@@ -1,9 +1,6 @@
 name: Build ARM bindings
 
-on:
-  push:
-    tags:
-      - "v*"
+on: [push]
 
 jobs:
   build:
@@ -44,6 +41,7 @@ jobs:
             --no-cache \
             --build-arg NODE_VERSION=${{ matrix.nodeVersion }} \
             --build-arg VARIANT=${{ matrix.variant }} \
+            --build-arg COMMIT_MESSAGE=$(git show -s --format=%B $GITHUB_SHA | tr -d '\n')
             --build-arg AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
             --build-arg AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
             .
