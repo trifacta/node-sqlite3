@@ -26,9 +26,10 @@ publish
 echo "building from source to test against external libsqlite3"
 export NODE_SQLITE3_JSON1=no
 if [[ $(uname -s) == 'Darwin' ]]; then
-    brew update
-    brew install sqlite
-    npm install --build-from-source --sqlite=$(brew --prefix) --clang=1
+    # MacOS external sqlite3 installed through homebrew does not support extension loading  (mapbox/node-sqlite3/issues/1509)
+    #brew update
+    #brew install sqlite
+    #npm install --build-from-source --sqlite=$(brew --prefix) --clang=1
 else
     npm install --build-from-source --sqlite=/usr --clang=1
 fi
